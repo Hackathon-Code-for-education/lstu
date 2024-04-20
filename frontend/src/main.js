@@ -10,6 +10,7 @@ import profilePage from './views/profilePage.vue'
 import aboutUni from './components/custom/profile/aboutUni.vue'
 import ReviewsPage from './views/ReviewsPage.vue'
 import dialogList from './components/custom/profile/dialogList.vue'
+import messenger from './components/custom/profile/messenger.vue'
 
 const router = createRouter({
   routes: [
@@ -48,6 +49,10 @@ const router = createRouter({
         {
           path: 'dialogs',
           component: dialogList
+        },
+        {
+          path: 'dialogs/:dialogId/messenger',
+          component: messenger
         }
       ]
     }
