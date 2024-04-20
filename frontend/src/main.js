@@ -8,6 +8,7 @@ import VirtualTour from './views/VirtualTour.vue'
 import registerPage from './views/registerPage.vue'
 import profilePage from './views/profilePage.vue'
 import aboutUni from './components/custom/profile/aboutUni.vue'
+import ReviewsPage from './views/ReviewsPage.vue'
 
 const router = createRouter({
   routes: [
@@ -20,7 +21,7 @@ const router = createRouter({
       path: '/registerPage',
       name: 'registerPage',
       component: registerPage
-    }, 
+    },
     {
       path: '/virtuatour',
       name: 'VirtualTour',
@@ -38,6 +39,10 @@ const router = createRouter({
         {
           path: 'virtualTour',
           component: VirtualTour
+        },
+        {
+          path: 'ReviewsPage',
+          component: ReviewsPage
         }
       ]
     }

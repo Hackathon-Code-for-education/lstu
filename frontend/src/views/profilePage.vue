@@ -38,7 +38,11 @@ import {
               ><Image /> Виртуальная экскурсия</Button
             >
           </router-link>
-          <Button variant="ghost" class="justify-start gap-2"><Megaphone /> Рецензии</Button>
+          <router-link to="ReviewsPage"
+            ><Button variant="ghost" class="justify-start gap-2"
+              ><Megaphone /> Рецензии</Button
+            ></router-link
+          >
           <Button variant="ghost" class="justify-start gap-2"
             ><MessageSquare /> Чат со студентами</Button
           >
