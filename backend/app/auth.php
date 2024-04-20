@@ -6,7 +6,7 @@ header('Access-Control-Allow-Methods: POST');
 session_start();
 
 
-$pdo = new PDO("pgsql:host=postgres-db; dbname=code_future", "user", "user");
+$pdo = new PDO("pgsql:host=postgres-db; dbname=code-future-2024", "user", "user");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["email"])) {

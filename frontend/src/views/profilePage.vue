@@ -1,4 +1,5 @@
 <script setup>
+<<<<<<< HEAD
 import siteHeader from '../components/custom/profile/siteHeader.vue';
 import Button from '@/components/ui/button/Button.vue';
 import { Info } from 'lucide-vue-next';
@@ -28,6 +29,21 @@ import { Info } from 'lucide-vue-next';
             <!-- Колонка содержимого -->
             <div></div>
         </div>
+=======
+import siteHeader from '../components/custom/profile/siteHeader.vue'
+
+console.log(localStorage)
+</script>
+
+<template>
+  <div class="flex flex-col p-16 gap-8">
+    <siteHeader />
+    <div>
+      <div class="flex items-center gap-4">
+        <img src="https://place-hold.it/96x132" alt="" />
+        <h2>Липецкий государственный технический университет (ЛГТУ)</h2>
+      </div>
+>>>>>>> e3b53bec11d26657e0c9315df10a214af76f07fd
     </div>
-</div>
+  </div>
 </template>
