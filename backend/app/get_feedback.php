@@ -14,7 +14,7 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
-    $sql = "SELECT f.id_feedback, u.full_name_user, f.rate_feedback, f.text_feedback 
+    $sql = "SELECT f.id_feedback, u.full_name_user, f.rate_feedback, f.text_feedback, f.date_feedback, f.moderated
             FROM public.feedback AS f 
             INNER JOIN public.users AS u ON f.id_user = u.id_user 
             WHERE f.id_vuz = :id_vuz";
