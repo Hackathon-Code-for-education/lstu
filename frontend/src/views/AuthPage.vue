@@ -3,7 +3,7 @@
     <div
       class="flex flex-col h-full w-full sm:w-1/2 lg:w-1/3 gap-6 sm:gap-16 justify-center items-center"
     >
-      <h1>Hello,world</h1>
+      <h1>Hello,world, test-test</h1>
     </div>
   </div>
 </template>
