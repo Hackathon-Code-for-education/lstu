@@ -35,6 +35,6 @@
 3. Копируем данные с нашей локальной машиныв контейнер командой
    `sudo docker cp ~/Desktop/<SQL-скрипт>.sql <id-контейнера>:/<SQL-скрипт>.sql`
 4. Далее в самом контейнере подключаемся к нашей БД
-   `psql -H postgres-db -U user -d gagarin-2024`
+   `psql -H postgres-db -U user -d code-future-2024`
 5. Выполняем скрипт `\i <SQL-скрипт>.sql`
 6. Готово
