@@ -2,9 +2,18 @@
   <div class="flex items-center justify-center h-screen">
     <div class="flex flex-col items-center gap-10">
       <siteLogo class="mb-1"></siteLogo>
-      <h1 class="text-black font-semibold text-2xl">Вход</h1>
+      <h1 class="text-black font-semibold text-2xl">Регистрация</h1>
       <div class="grid w-full max-w-sm items-center gap-1.5">
         <form class="w-96 space-y-6" @submit="onSubmit">
+          <FormField v-slot="{ componentField: FIOField }" name="fio">
+            <FormItem>
+              <FormLabel>ФИО</FormLabel>
+              <FormControl>
+                <Input type="text" placeholder="Введите ФИО..." v-bind="FIOField" />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          </FormField>
           <FormField v-slot="{ componentField: EmailField }" name="email">
             <FormItem>
               <FormLabel>Почта</FormLabel>
@@ -23,11 +32,30 @@
               <FormMessage />
             </FormItem>
           </FormField>
-
+          <FormField v-slot="{ componentField: STUField }" name="stu">
+            <FormItem>
+              <FormLabel>Выберите свой ВУЗ</FormLabel>
+              <FormControl>
+                <Select v-bind="STUField">
+                  <SelectTrigger class="w-96">
+                    <SelectValue placeholder="Выберите вуз из списка" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel></SelectLabel>
+                      <SelectItem value="lgtu"> ЛГТУ </SelectItem>
+                      <SelectItem value="lpgu"> ЛГПУ </SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          </FormField>
           <Toaster />
           <div class="flex flex-col items-center gap-5">
-            <Button type="submit" class="text-white"> Войти </Button>
-            <p @click="goToRegister" class="cursor-pointer">Зарегистрироваться</p>
+            <Button type="submit" class="text-white"> Зарегистрироваться </Button>
+            <p @click="goToAuth" class="cursor-pointer">Войти</p>
             <p class="cursor-pointer">Забыл пароль?</p>
           </div>
         </form>
@@ -56,13 +84,22 @@ import {
   FormLabel,
   FormMessage
 } from '@/components/ui/form'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue
+} from '@/components/ui/select'
 import { ref } from 'vue'
 import axios from 'axios'
 
 const router = useRouter()
 
-const goToRegister = () => {
-  router.push({ name: 'registerPage' })
+const goToAuth = () => {
+  router.push({ name: 'AuthPage' })
 }
 
 const formSchema = toTypedSchema(
@@ -75,7 +112,8 @@ const formSchema = toTypedSchema(
     password: z
       .string({ required_error: 'Поле не должно быть пустым' })
       .min(6, { message: 'Пароль должен содержать минимум 6 символов' })
-      .max(40, { message: 'Пароль должен содержать не больше 40 символов' })
+      .max(40, { message: 'Пароль должен содержать не больше 40 символов' }),
+    stu: z.string({ required_error: 'Поле не должно быть пустым' })
   })
 )
 
