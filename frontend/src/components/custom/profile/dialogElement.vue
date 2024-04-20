@@ -1,0 +1,26 @@
+<script setup>
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
+</script>
+
+<template>
+  <div class="flex gap-4">
+    <Avatar>
+      <AvatarImage src="https://api.dicebear.com/8.x/lorelei-neutral/svg" alt="@radix-vue" />
+      <AvatarFallback>CN</AvatarFallback>
+    </Avatar>
+    <!-- Содержимое элемента списка диалогов -->
+    <div class="flex flex-col gap-2">
+      <!-- Заголовок элемента -->
+      <div class="flex justify-between">
+        <p>Аноним №1029345784573</p>
+        <!-- Метаданные об элементе -->
+        <div>14 марта 2023</div>
+      </div>
+      <!-- Последняя строка диалога -->
+      <p>
+        Лишь явные признаки победы институционализации, которые представляют собой яркий пример
+        континентально-европейского типа политической культуры, будут призваны к ответу.
+      </p>
+    </div>
+  </div>
+</template>
