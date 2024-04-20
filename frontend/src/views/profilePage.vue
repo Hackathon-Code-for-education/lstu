@@ -43,9 +43,11 @@ import {
               ><Megaphone /> Рецензии</Button
             ></router-link
           >
-          <Button variant="ghost" class="justify-start gap-2"
-            ><MessageSquare /> Чат со студентами</Button
-          >
+          <router-link to="dialogs">
+            <Button variant="ghost" class="justify-start gap-2"
+              ><MessageSquare /> Чат со студентами</Button
+            >
+          </router-link>
           <Button variant="ghost" class="justify-start gap-2"
             ><ShoppingBag /> Сувенирный магазин</Button
           >

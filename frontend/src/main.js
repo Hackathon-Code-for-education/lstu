@@ -9,6 +9,7 @@ import registerPage from './views/registerPage.vue'
 import profilePage from './views/profilePage.vue'
 import aboutUni from './components/custom/profile/aboutUni.vue'
 import ReviewsPage from './views/ReviewsPage.vue'
+import dialogList from './components/custom/profile/dialogList.vue'
 
 const router = createRouter({
   routes: [
@@ -43,6 +44,10 @@ const router = createRouter({
         {
           path: 'ReviewsPage',
           component: ReviewsPage
+        },
+        {
+          path: 'dialogs',
+          component: dialogList
         }
       ]
     }
