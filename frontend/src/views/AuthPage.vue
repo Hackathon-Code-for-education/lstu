@@ -84,35 +84,36 @@ const { handleSubmit, errors } = useForm({
 })
 
 const onSubmit = handleSubmit(async (formData) => {
-  // const apiFormData = new FormData()
-  // const userData = formData
-  // apiFormData.append('login', userData.login)
-  // apiFormData.append('password', userData.password)
-  // try {
-  //   const response = await axios.post('http://localhost/postAuthAPI.php', apiFormData, {
-  //     headers: {
-  //       'Content-Type': 'multipart/form-data'
-  //     }
-  //   })
-  //   console.log(response.data)
-  //   if (response.data.status == 'success') {
-  //     localStorage.clear()
-  //     localStorage.setItem('email', response.data.email)
-  //     localStorage.setItem('id_user', response.data.id_user)
-  //     localStorage.setItem('role', response.data.role)
-  //     router.push('/mainPage')
-  //   }
-  //   // Высплывашка тостер
-  //   const { toast } = useToast()
-  //   if (response.data.status == 'error') {
-  //     toast({
-  //       description: 'Ошибка авторизации, введен не правильный логин или пароль',
-  //       variant: 'destructive'
-  //     })
-  //   }
-  // } catch (error) {
-  //   console.error('Ошибка при отправке данных:', error)
-  // }
+  const apiFormData = new FormData()
+  const userData = formData
+  apiFormData.append('email', userData.email)
+  apiFormData.append('password', userData.password)
+  try {
+    const response = await axios.post('http://localhost:8080/auth.php', apiFormData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+    console.log(response.data)
+    if (response.data.status == 'success') {
+      localStorage.clear()
+      localStorage.setItem('email', response.data.email)
+      localStorage.setItem('id_user', response.data.id_user)
+      localStorage.setItem('role', response.data.role)
+      localStorage.setItem('full_name', response.data.full_name)
+      // router.push('/mainPage')
+    }
+    // Высплывашка тостер
+    const { toast } = useToast()
+    if (response.data.status == 'error') {
+      toast({
+        description: 'Ошибка авторизации, введен не правильный логин или пароль',
+        variant: 'destructive'
+      })
+    }
+  } catch (error) {
+    console.error('Ошибка при отправке данных:', error)
+  }
 })
 </script>
 
