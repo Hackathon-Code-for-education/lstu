@@ -166,6 +166,7 @@ const onSubmit = handleSubmit(async (formData) => {
   registerFormData.append('full_name', userData.fio)
   registerFormData.append('password', userData.password)
   registerFormData.append('role', userData.Radio)
+  registerFormData.append('id_vuz', userData.stu)
 
   try {
     const response = await axios.post('http://localhost:8080/registration.php', registerFormData, {
