@@ -1,0 +1,48 @@
+version: "3.9"
+services:
+  webserver:
+    container_name: code-future-PHP-webServer
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./app:/var/www/html
+    ports:
+      - 80:80
+    depends_on:
+      - postgres-db
+    networks:
+      code-future_network:
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  postgres-db:
+    image: postgres:15.3-alpine3.17
+    container_name: postgres-15-code-future
+    command:
+      - "postgres"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: user
+      POSTGRES_DB: code-future-2024
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - ./postgres:/docker-entrypoint-initdb.d
+      - postgresdb-data:/var/lib/postgresql/data
+      - ./postgres:/dump
+    ports:
+      - "5433:5432"
+    networks:
+      code-future_network:
+
+volumes:
+  postgresdb-data:
+
+networks:
+  code-future_network:
+    driver: bridge
+    name: code-future_network
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.33.0.0/25
