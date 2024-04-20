@@ -7,6 +7,7 @@ import AuthPage from './views/AuthPage.vue'
 import VirtualTour from './views/VirtualTour.vue'
 import registerPage from './views/registerPage.vue'
 import profilePage from './views/profilePage.vue'
+import aboutUni from './components/custom/profile/aboutUni.vue'
 
 const router = createRouter({
   routes: [
@@ -28,7 +29,17 @@ const router = createRouter({
     {
       path: '/profile',
       name: 'profile',
-      component: profilePage
+      component: profilePage,
+      children: [
+        {
+          path: 'aboutUniversity',
+          component: aboutUni
+        },
+        {
+          path: 'virtualTour',
+          component: VirtualTour
+        }
+      ]
     }
   ],
   history: createWebHistory()
