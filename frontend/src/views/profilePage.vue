@@ -53,7 +53,7 @@ import {
           >
         </div>
         <!-- Колонка содержимого -->
-        <div class="flex max-h-full overflow-y-auto">
+        <div class="flex max-h-full overflow-y-auto w-full">
           <router-view />
         </div>
       </div>

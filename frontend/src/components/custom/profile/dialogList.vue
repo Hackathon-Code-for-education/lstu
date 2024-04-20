@@ -1,20 +1,20 @@
 <script setup>
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import dialogElement from './dialogElement.vue'
+import dialogListElement from './dialogListElement.vue'
 </script>
 
 <template>
-  <div>
-    <h3>Чат со студентами</h3>
+  <div class="flex flex-col gap-4">
+    <h3 class="h3">Чат со студентами</h3>
     <Card class="w-full">
       <CardHeader>
         <CardTitle>Список диалогов</CardTitle>
       </CardHeader>
       <CardContent class="flex flex-col gap-6">
-        <dialogElement/>
-        <dialogElement/>
-        <dialogElement/>
-        <dialogElement/>
+        <dialogListElement/>
+        <dialogListElement/>
+        <dialogListElement/>
+        <dialogListElement/>
       </CardContent>
     </Card>
   </div>
