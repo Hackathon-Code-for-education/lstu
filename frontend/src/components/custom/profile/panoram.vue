@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Пример использования для тура -->
-    <v-pannellum :src="tourSources" style="height: 400px"></v-pannellum>
+    <v-pannellum :src="tourSources"></v-pannellum>
   </div>
 </template>
 

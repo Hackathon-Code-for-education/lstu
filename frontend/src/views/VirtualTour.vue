@@ -17,11 +17,11 @@ const router = useRouter()
 </script>
 
 <template>
-  <div class="flex flex-col gap-[24px] max-h-full h-full box-border">
-    <h3 class="text-h3">Виртуальная экскурсия</h3>
-    <h4 class="text-h4">Панорамный просмотр</h4>
+  <div class="flex flex-col gap-[12px] max-h-full h-full box-border">
+    <h3 class="font-semibold text-2xl">Виртуальная экскурсия</h3>
+    <h4 class="font-medium text-xl">Панорамный просмотр</h4>
     <Panorama class="panoram w-[996px] h-[480px]" />
-    <h4 class="text-h4">Фотографии</h4>
+    <h4 class="font-semibold text-xl">Фотографии</h4>
     <PhotoCard img_tour="your_image_path" :id_vereficate="true" name_author="ЛГТУ" />
   </div>
 </template>
