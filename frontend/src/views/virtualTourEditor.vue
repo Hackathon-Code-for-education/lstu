@@ -35,7 +35,7 @@ import {
         </div>
         <div class="flex flex-col gap-4">
           <div class="flex flex-col">
-            <!-- ЗДЕСЬ И В АНАЛОГИЧНЫХ МЕСТАХ ОЖИДАЕТСЯ V-FOR -->
+            <!-- ЗДЕСЬ И В АНАЛОГИЧНЫХ МЕСТАХ ОЖИДАЕТСЯ V-FOR ДА ДА хорошо, обязательно))) -->
             <Button variant="ghost" class="justify-start">Столовая</Button>
             <Button variant="ghost" class="justify-start">Библиотека</Button>
             <Button variant="ghost" class="justify-start">Снаружи</Button>

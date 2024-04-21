@@ -18,6 +18,10 @@ const idVuz = ref(`${localStorage.id_vuz}`)
 
 console.log(idVuz.value)
 
+let items = ref({})
+
+console.log(items)
+
 onMounted(async () => {
   const apiFormData = new FormData()
 
@@ -26,7 +30,9 @@ onMounted(async () => {
   try {
     const response = await axios.post('http://localhost:8080/get_vuz_spec.php', apiFormData)
 
-    console.log('Ответ от сервера:', response.data)
+    items.value = response.data
+
+    // console.log('Ответ от сервера:', response.data)
   } catch (error) {
     console.error('Ошибка при отправке данных:', error)
   }
@@ -41,7 +47,7 @@ onMounted(async () => {
       <!-- Название универа -->
       <div class="flex items-center gap-4">
         <img src="https://place-hold.it/96x132" alt="" />
-        <h2>Липецкий государственный технический университет (ЛГТУ)</h2>
+        <h2>АБОБА</h2>
       </div>
       <!-- Колонки -->
       <div class="flex gap-8 h-full">
