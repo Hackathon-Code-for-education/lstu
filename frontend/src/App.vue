@@ -1,4 +1,6 @@
-<script setup></script>
+<script setup>
+import debounce from 'lodash.debounce'
+</script>
 
 <template>
   <router-view />
