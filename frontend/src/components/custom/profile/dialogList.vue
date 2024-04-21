@@ -8,9 +8,9 @@ import { ref } from 'vue'
 const studentVuz = ref([])
 const dialog = ref([])
 
-let id_vuz = 6
 const formData = new FormData()
-formData.append('id_vuz', id_vuz)
+formData.append('id_vuz', localStorage.id_vuz)
+formData.append('id_user', localStorage.id_user)
 
 axios
   .post(`http://localhost:8080/get_vuz_user.php`, formData, {
