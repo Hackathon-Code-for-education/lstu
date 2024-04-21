@@ -12,8 +12,17 @@ import { Star, ChevronRight, Send } from 'lucide-vue-next'
 import { useRouter } from 'vue-router'
 import PhotoCard from '@/components/custom/profile/photoCard.vue'
 import Panorama from '@/components/custom/profile/panoram.vue'
+import { ref, onMounted, computed } from 'vue'
 
 const router = useRouter()
+
+let isvisible = ref(true)
+
+console.log(localStorage.role)
+
+if (localStorage.role == 'abiturient') {
+  isvisible.value = false
+}
 </script>
 
 <template>
@@ -23,7 +32,7 @@ const router = useRouter()
     <!-- Небольшое меню: слева список туров, справа показ панорам -->
     <div class="flex gap-4">
       <!-- Список туров -->
-      <div class="flex flex-col gap-2">
+      <div v-if="isvisible" class="flex flex-col gap-2">
         <h5>Экскурсии</h5>
         <router-link to="VirtualTour/edit">
           <Button>Добавить экскурсию</Button>

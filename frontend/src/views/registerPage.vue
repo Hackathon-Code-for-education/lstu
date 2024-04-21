@@ -13,7 +13,6 @@
                   v-model="selectedRole"
                   v-bind="RadioField"
                   default-value="student"
-                  @change="handleRoleChange"
                 >
                   <div class="flex items-center space-x-2">
                     <RadioGroupItem id="r1" value="student" />
@@ -60,7 +59,7 @@
               <FormMessage />
             </FormItem>
           </FormField>
-          <FormField v-if="isStuRole" v-slot="{ componentField: STUField }" name="stu">
+          <FormField v-slot="{ componentField: STUField }" name="stu">
             <FormItem>
               <FormLabel>Выберите свой ВУЗ</FormLabel>
               <FormControl>
@@ -85,6 +84,8 @@
             <Button type="submit" class="text-white"> Зарегистрироваться </Button>
             <p @click="goToAuth" class="cursor-pointer">Войти</p>
             <p class="cursor-pointer">Забыл пароль?</p>
+
+            {{ selectedRole }}
           </div>
         </form>
       </div>
@@ -155,21 +156,11 @@ const { handleSubmit, errors } = useForm({
   validationSchema: formSchema
 })
 
-const isStuRole = computed(() => selectedRole.value === 'student')
-
-let isVisible = ref(true)
 let selectedRole = ref('student')
 
-console.log(isVisible.value)
 console.log(selectedRole.value)
 
-const handleRoleChange = () => {
-  if (selectedRole.value === 'student' || selectedRole.value === 'representative') {
-    isVisible.value = true
-  } else {
-    isVisible.value = false
-  }
-}
+console.log(localStorage)
 
 const onSubmit = handleSubmit(async (formData) => {
   const registerFormData = new FormData()
@@ -180,7 +171,7 @@ const onSubmit = handleSubmit(async (formData) => {
   registerFormData.append('full_name', userData.fio)
   registerFormData.append('password', userData.password)
   registerFormData.append('role', userData.Radio)
-  registerFormData.append('id_vuz', userData.stu)
+  // registerFormData.append('id_vuz', userData.stu)
 
   try {
     const response = await axios.post('http://localhost:8080/registration.php', registerFormData, {
@@ -188,7 +179,7 @@ const onSubmit = handleSubmit(async (formData) => {
         'Content-Type': 'multipart/form-data'
       }
     })
-    // console.log(response.data)
+    console.log(response.data)
     if (response.data.status == 'success') {
       localStorage.clear()
       localStorage.setItem('email', response.data.email)
