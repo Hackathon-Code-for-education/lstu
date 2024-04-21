@@ -20,12 +20,7 @@ const router = useRouter()
   <div class="flex flex-col gap-[24px] max-h-full h-full box-border">
     <h3 class="text-h3">Виртуальная экскурсия</h3>
     <h4 class="text-h4">Панорамный просмотр</h4>
-    <iframe
-      class="panoram w-[996px] h-[480px]"
-      allowfullscreen
-      style="border-style: none"
-      src="https://cdn.pannellum.org/2.5/pannellum.htm#panorama=https://i.imgur.com/A7Geg2M.png"
-    ></iframe>
+    <Panorama class="panoram w-[996px] h-[480px]" />
     <h4 class="text-h4">Фотографии</h4>
     <PhotoCard img_tour="your_image_path" :id_vereficate="true" name_author="ЛГТУ" />
   </div>
