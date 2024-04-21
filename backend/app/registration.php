@@ -47,6 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ];
 
             $stmtInsert = $pdo->prepare("INSERT INTO users (email_user, password_user, role, full_name_user) VALUES (:email, :hashedPassword, :role_user, :full_name_user)");
+            $stmtInsert = $pdo->prepare("INSERT INTO users (email_user, password_user, role, full_name_user) VALUES (:email, :hashedPassword, :role_user, :full_name_user)");
             $stmtInsert->execute($data);
 
             $id_user = $pdo->lastInsertId();

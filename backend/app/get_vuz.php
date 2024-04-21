@@ -1,8 +1,6 @@
 <?php
 
 
-
-
 try {
     $pdo = new PDO("pgsql:host=postgres-db; dbname=code-future-2024", "user", "user");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -11,7 +9,7 @@ try {
 }
 
 // SQL запрос
-$sql = "SELECT id_vuz, name_vuz, info_vuz, site_vuz, adress_vuz, rating_vuz, phone_vuz FROM public.vuz";
+$sql = "SELECT id_vuz, name_vuz, info_vuz, site_vuz, adress_vuz, rating_vuz, phone_vuz, photo_vuz FROM public.vuz";
 
 try {
 
@@ -30,7 +28,7 @@ try {
         $adress_vuz = $row['adress_vuz'];
         $rating_vuz = $row['rating_vuz'];
         $phone_vuz = $row['phone_vuz'];
-
+        $photo_vuz = $row['photo_vuz'];
 
         $vuz_data[][] = array(
             'id_vuz' =>  $id_vuz,
@@ -39,7 +37,8 @@ try {
             'site_vuz' => $site_vuz,
             'adress_vuz' => $adress_vuz,
             'rating_vuz' => $rating_vuz,
-            'phone_vuz' => $phone_vuz
+            'phone_vuz' => $phone_vuz,
+            'photo_vuz' => $photo_vuz
         );
     }
 
