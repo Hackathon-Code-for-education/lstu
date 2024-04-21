@@ -8,6 +8,8 @@
 
 ## Презентация проекта - https://docs.google.com/presentation/d/1DaMDI1puichpKetyb_ijyGCJSXoe1HRnFmsQcvKcuJM/edit#slide=id.g2ce4dbe253d_48_14
 
+###### ЗАПУСКАТЬ ПРЕЗЕНТАЦИЮ С НАЗВАНИЕМ presentation with gifs.pptx
+
 ## Данные для пользователей
 
    1. Студент: Почта: artem@mail.ru  Пароль: 123456
