@@ -39,8 +39,8 @@ onMounted(async () => {
 
 <template>
   <div>
-    <h3>Сведения об организации</h3>
-    <h4>О вузе</h4>
+    <h3 class="font-semibold text-2xl">Сведения об организации</h3>
+    <h4 class="font-semibold text-2x">О вузе</h4>
     <p>
       {{ items.name_vuz }}
     </p>

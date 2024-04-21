@@ -84,8 +84,6 @@
             <Button type="submit" class="text-white"> Зарегистрироваться </Button>
             <p @click="goToAuth" class="cursor-pointer">Войти</p>
             <p class="cursor-pointer">Забыл пароль?</p>
-
-            {{ selectedRole }}
           </div>
         </form>
       </div>

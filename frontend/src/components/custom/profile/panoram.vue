@@ -24,11 +24,11 @@ export default {
             pitch: 20,
             yaw: 307,
             type: 'equirectangular',
-            panorama: 'https://i.imgur.com/5MSOx1k.jpeg ',
+            panorama: 'https://i.imgur.com/j0IDl4z.png ',
             hotSpots: [
               {
-                pitch: -20,
-                yaw: 35,
+                pitch: 0,
+                yaw: -55,
                 type: 'scene',
                 text: 'Войти в здание',
                 sceneId: 'enter'

@@ -44,6 +44,10 @@ const onsubmit = async () => {
           'Сообщение успешно отправлено, оно будет видно другим пользователям, после модерации'
       })
     } else {
+      toast({
+        description: 'Вы уже оставляли свой отзыв',
+        variant: 'destructive'
+      })
     }
   } catch (error) {
     console.error('Ошибка при отправке данных:', error)
@@ -70,8 +74,6 @@ const onsubmit = async () => {
           </SelectGroup>
         </SelectContent>
       </Select>
-      {{ rate }}
-      {{ textReview }}
       <div class="grid w-full gap-1.5">
         <Textarea
           v-model="textReview"
