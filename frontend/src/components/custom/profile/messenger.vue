@@ -11,6 +11,8 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
+const dialogIdString = router.currentRoute.value.params.dialogId;
+
 const goToMessenger = () => {
   router.push('/profile/dialogs')
 }
@@ -20,7 +22,7 @@ const inputText = ref('')
 const currentDate = ref('')
 
 const formData = new FormData()
-formData.append('id_chat', 6)
+formData.append('id_chat', dialogIdString)
 
 axios
   .post(`http://localhost:8080/message_view.php`, formData, {
@@ -56,7 +58,7 @@ async function sendMessage() {
   currentDate.value = `${year}-${month}-${day}`
 
   params.append('id_user', localStorage.id_user)
-  params.append('id_chat', 6)
+  params.append('id_chat', dialogIdString)
   params.append('text_message', inputText.value)
 
   studentVuzing.value.push({
@@ -89,7 +91,7 @@ async function sendMessage() {
         <Button @click="goToMessenger()" variant="outline" size="icon">
           <ChevronLeft class="w-4 h-4" />
         </Button>
-        <CardTitle>Диалог с Аноним №5784357493</CardTitle>
+        <CardTitle>Диалог</CardTitle>
       </CardHeader>
       <CardContent class="flex flex-col gap-6">
         <messengerReplica
@@ -99,11 +101,6 @@ async function sendMessage() {
           :id_student="item.id_student"
           :text_message="item.text_message"
         />
-        <!-- <messengerReplica />
-        <messengerReplica />
-        <messengerReplica />
-        <messengerReplica /> -->
-        <!-- Поле отправки сообщений -->
         <div class="flex gap-6">
           <Button variant="outline" size="icon">
             <Paperclip class="w-4 h-4" />
