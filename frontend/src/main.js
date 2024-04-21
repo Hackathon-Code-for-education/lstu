@@ -14,6 +14,7 @@ import messenger from './components/custom/profile/messenger.vue'
 import SearchUniversity from './views/searchUniversity.vue'
 import structurePage from './views/structurePage.vue'
 import reviewEditor from './views/reviewEditor.vue'
+import VirtualTourEditor from './views/virtualTourEditor.vue'
 
 const router = createRouter({
   routes: [
@@ -49,6 +50,10 @@ const router = createRouter({
         {
           path: 'virtualTour',
           component: VirtualTour
+        },
+        {
+          path: 'virtualTour/edit',
+          component: VirtualTourEditor
         },
         {
           path: 'ReviewsPage',
