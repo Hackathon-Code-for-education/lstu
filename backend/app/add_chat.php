@@ -29,17 +29,9 @@ try {
     $stmt_check_chat->execute();
     $existing_chat = $stmt_check_chat->fetchColumn();
 
-    // Если чат уже существует, возвращаем список сообщений из этого чата
+    // Если чат уже существует, возвращаем его id_chat и сообщение
     if ($existing_chat) {
-        // SQL запрос для получения сообщений из существующего чата
-        $sql_get_messages = "SELECT id_user, text_message, date_message FROM message WHERE id_chat = :existing_chat";
-        $stmt_get_messages = $db->prepare($sql_get_messages);
-        $stmt_get_messages->bindParam(':existing_chat', $existing_chat);
-        $stmt_get_messages->execute();
-        $messages = $stmt_get_messages->fetchAll(PDO::FETCH_ASSOC);
-
-        // Отправляем список сообщений на frontend
-        echo json_encode($messages);
+        echo json_encode(array("id_chat" => $existing_chat, "message" => "Чат уже существует"));
     } else {
         // Создаем новый чат
         $sql_create_chat = "INSERT INTO chat (id_vuz) VALUES (:id_vuz) RETURNING id_chat";
@@ -61,8 +53,8 @@ try {
         $stmt_insert_does_with->bindParam(':id_user_with', $id_user_with);
         $stmt_insert_does_with->execute();
 
-        // Отправляем успешное сообщение на frontend
-        echo json_encode(array("message" => "Чат успешно создан "));
+        // Отправляем id_chat нового чата и сообщение об успешном создании на frontend
+        echo json_encode(array("id_chat" => $new_chat_id, "message" => "Новый чат успешно создан"));
     }
 } catch(PDOException $e) {
     // Если произошла ошибка, выводим её
