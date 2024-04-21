@@ -12,6 +12,8 @@ import ReviewsPage from './views/ReviewsPage.vue'
 import dialogList from './components/custom/profile/dialogList.vue'
 import messenger from './components/custom/profile/messenger.vue'
 import SearchUniversity from './views/searchUniversity.vue'
+import structurePage from './views/structurePage.vue'
+import reviewEditor from './views/reviewEditor.vue'
 
 const router = createRouter({
   routes: [
@@ -53,12 +55,20 @@ const router = createRouter({
           component: ReviewsPage
         },
         {
+          path: 'ReviewsPage/new',
+          component: reviewEditor
+        },
+        {
           path: 'dialogs',
           component: dialogList
         },
         {
           path: 'dialogs/:dialogId/messenger',
           component: messenger
+        },
+        {
+          path: 'structure',
+          component: structurePage
         }
       ]
     }

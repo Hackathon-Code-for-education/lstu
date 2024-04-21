@@ -15,18 +15,16 @@
         <Search class="size-6 text-muted-foreground" />
       </span>
     </div>
-    <p class="ml-5 mt-5">{{ query }}</p>
-
     <!-- Карточки для вузов-->
-    <div v-for="item in items" :key="item.id_vuz" class="ml-12 mt-12">
+    <div v-for="item in queryItems" :key="item.id_vuz" class="ml-12 mt-12">
       <div class="flex gap-12">
         <div class="flex justify-end items-center pl-12">
           <img :src="`/images/${item[0].photo_vuz}`" class="w-[100px] h-[140px]" />
         </div>
 
-        <div class="bg-white min-w-[300px] max-w-[545px] h-[194px]">
-          <p class="font-semibold mt-6">{{ item[0].name_vuz }}</p>
-          <p class="text-sm mt-2">
+        <div @click="goToUniverity" class="bg-white min-w-[300px] max-w-[545px] h-[194px]">
+          <p class="font-semibold mt-6 cursor-pointer">{{ item[0].name_vuz }}</p>
+          <p class="text-sm mt-2 cursor-default">
             {{ item[0].info_vuz }}
           </p>
           <div class="flex justify-between mt-2">
@@ -77,9 +75,11 @@ import { MapPin } from 'lucide-vue-next'
 import { Phone } from 'lucide-vue-next'
 import { Star } from 'lucide-vue-next'
 
-let query = ref('')
+let router = useRouter()
 
 let items = ref([])
+
+let query = ref('')
 
 onMounted(async () => {
   try {
@@ -92,6 +92,23 @@ onMounted(async () => {
     console.error(err)
   }
 })
+
+const goToUniverity = () => {
+  localStorage.setItem('id_vuz', '6')
+  router.push('/profile/aboutUniversity')
+}
+
+const queryItems = computed(() => {
+  let product = items.value
+
+  if (query.value) {
+    product = product.filter((elem) => elem[0].name_vuz.indexOf(query.value) !== -1)
+  }
+
+  return product
+})
+
+console.log(localStorage)
 </script>
 
 <style lang="scss" scoped></style>
