@@ -34,23 +34,18 @@ try {
     $statement->bindValue(':id_chat', $id_chat, PDO::PARAM_INT);
     $statement->execute();
 
-    // Устанавливаем заголовок Content-Type перед выводом первого сообщения
-    header('Content-Type: application/json');
+    // Получаем все результаты в виде ассоциативного массива
+    $results = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    $first = true; // флаг для первого объекта JSON
-    // Обрабатываем каждую строку результата
-    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-        // Если это не первый объект, добавляем запятую
-        if (!$first) {
-            echo ",";
-        } else {
-            $first = false; // Устанавливаем флаг в false после первого объекта
-        }
-        echo json_encode($row); // Выводим каждую строку в формате JSON
-        echo "\n"; // Добавляем перевод строки между объектами (опционально)
+    // Проверяем, были ли найдены сообщения для данного id_chat
+    if ($results) {
+        // Отправляем результат в формате JSON
+        header('Content-Type: application/json');
+        echo json_encode($results);
+    } else {
+        echo "Сообщения не найдены для указанного id_chat.";
     }
 } catch (PDOException $e) {
     echo "Ошибка выполнения запроса: " . $e->getMessage();
 }
-
 ?>
