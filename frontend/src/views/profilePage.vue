@@ -26,31 +26,31 @@ import {
         <!-- Колонка меню -->
         <div class="flex flex-col w-[300px]">
           <router-link to="aboutUniversity">
-            <Button variant="ghost" class="justify-start gap-2"
+            <Button variant="ghost" class="justify-start gap-2 w-full"
               ><Info /> Сведения об организации</Button
             >
           </router-link>
           <router-link to="structure">
-          <Button variant="ghost" class="justify-start gap-2"
+          <Button variant="ghost" class="justify-start gap-2 w-full"
             ><LayoutDashboard /> Структура организации</Button
           >
           </router-link>
           <router-link to="virtualTour">
-            <Button variant="ghost" class="justify-start gap-2"
+            <Button variant="ghost" class="justify-start gap-2 w-full"
               ><Image /> Виртуальная экскурсия</Button
             >
           </router-link>
           <router-link to="ReviewsPage"
-            ><Button variant="ghost" class="justify-start gap-2"
+            ><Button variant="ghost" class="justify-start gap-2 w-full"
               ><Megaphone /> Рецензии</Button
             ></router-link
           >
           <router-link to="dialogs">
-            <Button variant="ghost" class="justify-start gap-2"
+            <Button variant="ghost" class="justify-start gap-2 w-full"
               ><MessageSquare /> Чат со студентами</Button
             >
           </router-link>
-          <Button variant="ghost" class="justify-start gap-2"
+          <Button variant="ghost" class="justify-start gap-2 w-full"
             ><ShoppingBag /> Сувенирный магазин</Button
           >
         </div>
