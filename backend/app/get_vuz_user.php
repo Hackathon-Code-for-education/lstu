@@ -12,6 +12,9 @@ try {
     // Устанавливаем соединение с базой данных
     $dbh = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
     
+    // Получаем значение id_user из POST запроса
+    $id_user_to_exclude = $_POST['id_user']; // Проверьте, что id_user действительно передается через POST запрос
+    
     // Получаем значение id_vuz из POST запроса
     $id_vuz = $_POST['id_vuz']; // Проверьте, что id_vuz действительно передается через POST запрос
     
@@ -30,8 +33,13 @@ try {
     // Получаем результат в виде ассоциативного массива
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-    // Выводим результат в формате JSON
-    echo json_encode($result);
+    // Фильтруем результат и исключаем совпадающий id_user
+    $filtered_result = array_filter($result, function($row) use ($id_user_to_exclude) {
+        return $row['id_user'] != $id_user_to_exclude;
+    });
+    
+    // Выводим отфильтрованный результат в формате JSON
+    echo json_encode(array_values($filtered_result));
 } catch (PDOException $e) {
     // В случае ошибки выводим сообщение об ошибке
     echo json_encode(array("error" => $e->getMessage()));
