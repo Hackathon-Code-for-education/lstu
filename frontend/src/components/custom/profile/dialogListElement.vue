@@ -7,10 +7,20 @@ const props = defineProps({
   id_chat: String,
   last_message: String
 })
+
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const goToMessenger = (dialogId) => {
+  console.log('click')
+  router.push({ name: 'Messenger', params: { dialogId: dialogId }});
+};
+
 </script>
 
 <template>
-  <div class="flex gap-4 w-full">
+  <div class="flex gap-4 w-full" @click="goToMessenger(id_chat)">
     <Avatar>
       <AvatarImage src="https://api.dicebear.com/8.x/lorelei-neutral/svg" alt="@radix-vue" />
       <AvatarFallback>CN</AvatarFallback>
