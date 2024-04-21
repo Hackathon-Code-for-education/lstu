@@ -12,6 +12,7 @@ import ReviewsPage from './views/ReviewsPage.vue'
 import dialogList from './components/custom/profile/dialogList.vue'
 import messenger from './components/custom/profile/messenger.vue'
 import SearchUniversity from './views/searchUniversity.vue'
+import structurePage from './views/structurePage.vue'
 
 const router = createRouter({
   routes: [
@@ -59,6 +60,10 @@ const router = createRouter({
         {
           path: 'dialogs/:dialogId/messenger',
           component: messenger
+        },
+        {
+          path: 'structure',
+          component: structurePage
         }
       ]
     }

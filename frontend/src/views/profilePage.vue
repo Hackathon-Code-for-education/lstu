@@ -30,9 +30,11 @@ import {
               ><Info /> Сведения об организации</Button
             >
           </router-link>
+          <router-link to="structure">
           <Button variant="ghost" class="justify-start gap-2"
             ><LayoutDashboard /> Структура организации</Button
           >
+          </router-link>
           <router-link to="virtualTour">
             <Button variant="ghost" class="justify-start gap-2"
               ><Image /> Виртуальная экскурсия</Button
