@@ -12,12 +12,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $full_name = $_POST["full_name"];
     $password = $_POST["password"];
     $role_user = $_POST["role"];
+    $id_vuz = isset($_POST["id_vuz"]) ? $_POST["id_vuz"] : null; // Проверяем, есть ли id_vuz в POST-запросе, и присваиваем null, если его нет
 
-
-    if (empty($email) ||  empty($password) || empty($full_name)) {
+    if (empty($email) ||  empty($password) || empty($full_name)) { // Убираем проверку на пустое значение id_vuz
 
         header('Content-Type: application/json');
-        echo json_encode(array('status' => 'error', 'message' => 'Заполните все поля'));
+        echo json_encode(array('status' => 'error', 'message' => 'Заполните все обязательные поля'));
         exit();
     } else {
 
@@ -39,6 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 'hashedPassword' => $hashedPassword,
                 'full_name_user' => $full_name,
                 'role_user' => $role_user,
+                'id_vuz' => $id_vuz // Добавляем id_vuz в данные для вставки в базу данных
             ];
 
             $data_json = [
@@ -47,7 +48,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 'role_user' => $role_user,
             ];
 
-            $stmtInsert = $pdo->prepare("INSERT INTO users (email_user, password_user, role, full_name_user) VALUES (:email, :hashedPassword, :role_user, :full_name_user)");
+            // Если id_vuz был передан, добавляем его в данные и в ответ JSON
+            if ($id_vuz !== null) {
+                $data['id_vuz'] = $id_vuz;
+                $data_json['id_vuz'] = $id_vuz;
+            }
+
+            $stmtInsert = $pdo->prepare("INSERT INTO users (email_user, password_user, role, full_name_user, id_vuz) VALUES (:email, :hashedPassword, :role_user, :full_name_user, :id_vuz)");
             $stmtInsert->execute($data);
 
             $id_user = $pdo->lastInsertId();
