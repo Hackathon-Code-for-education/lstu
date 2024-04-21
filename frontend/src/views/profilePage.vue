@@ -18,7 +18,7 @@ const idVuz = ref(`${localStorage.id_vuz}`)
 
 console.log(idVuz.value)
 
-let items = ref({})
+let items = ref([])
 
 console.log(items)
 
@@ -46,8 +46,8 @@ onMounted(async () => {
     <div class="flex flex-col gap-4">
       <!-- Название универа -->
       <div class="flex items-center gap-4">
-        <img src="https://place-hold.it/96x132" alt="" />
-        <h2>АБОБА</h2>
+        <img :src="`/images/${items.photo_vuz}`" alt="" />
+        <h2>{{ items.name_vuz }}</h2>
       </div>
       <!-- Колонки -->
       <div class="flex gap-8 h-full">

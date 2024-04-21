@@ -103,13 +103,6 @@ const onSubmit = handleSubmit(async (formData) => {
       router.push('/searchUniversity')
     }
     // Высплывашка тостер
-    const { toast } = useToast()
-    if (response.data.status == 'error') {
-      toast({
-        description: 'Ошибка авторизации, введен не правильный логин или пароль',
-        variant: 'destructive'
-      })
-    }
   } catch (error) {
     console.error('Ошибка при отправке данных:', error)
   }
