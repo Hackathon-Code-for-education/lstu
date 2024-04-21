@@ -1,4 +1,7 @@
 <script setup>
+
+
+
 defineProps({
   isVertical: Boolean // Определяет вид логотипа: вертикальное или горизонтальное отображение
 })

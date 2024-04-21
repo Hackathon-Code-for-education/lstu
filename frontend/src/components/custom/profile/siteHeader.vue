@@ -8,6 +8,10 @@ let userName = ref(`${localStorage.full_name}`)
 
 let router = useRouter()
 
+const goToMain = () => {
+  router.push('/searchUniversity')
+}
+
 const goToExit = () => {
   localStorage.clear()
   router.push('/')
@@ -16,7 +20,7 @@ const goToExit = () => {
 
 <template>
   <div class="flex justify-between items-center">
-    <siteLogo></siteLogo>
+    <siteLogo @click="goToMain"></siteLogo>
     <div class="flex items-center gap-4">
       <Avatar>
         <AvatarImage src="https://api.dicebear.com/8.x/lorelei-neutral/svg" alt="@radix-vue" />
