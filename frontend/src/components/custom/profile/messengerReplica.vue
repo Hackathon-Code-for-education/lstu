@@ -1,5 +1,12 @@
 <script setup>
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
+
+const props = defineProps({
+  id_student: String,
+  date_message: String,
+  text_message: String
+})
+
 </script>
 
 <template>
@@ -12,15 +19,12 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
     <div class="flex flex-col gap-2">
       <!-- Заголовок элемента -->
       <div class="flex justify-between">
-        <p>Аноним №1029345784573</p>
+        <p>Аноним №{{ id_student }}</p>
         <!-- Метаданные об элементе -->
-        <div>14 марта 2023</div>
+        <div>{{ date_message }}</div>
       </div>
       <!-- Текст сообщения -->
-      <p>
-        Лишь явные признаки победы институционализации, которые представляют собой яркий пример
-        континентально-европейского типа политической культуры, будут призваны к ответу.
-      </p>
+      <p>{{ text_message }}</p>
     </div>
   </div>
 </template>

@@ -4,9 +4,10 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { ChevronLeft, Paperclip, Send } from 'lucide-vue-next'
 import messengerReplica from './messengerReplica.vue'
-
-import { useRouter } from 'vue-router'
+import dialogListElement from './dialogListElement.vue'
+import axios from 'axios'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
@@ -14,10 +15,9 @@ const goToMessenger = () => {
   router.push('/profile/dialogs')
 }
 
-import axios from 'axios'
-
-const studentVuz = ref([])
-const dialog = ref([])
+const studentVuzing = ref([])
+const inputText = ref('')
+const currentDate = ref('')
 
 const formData = new FormData()
 formData.append('id_chat', 6)
@@ -29,24 +29,56 @@ axios
     }
   })
   .then((response) => {
-    const responseData = response.data // Извлекаем данные из ответа
+    console.log(response.data)
 
-    console.log(responseData.value)
-
-    responseData.forEach((item) => {
-      dialog.value.push({
-        // id_chat: 6,
-        id_student: item.id_user,
-        text_message: item.text_message,
-        date_message: item.date_message
+    response.data.forEach((item) => {
+      studentVuzing.value.push({
+        id_user: item.id_user,
+        date_message: item.date_message,
+        text_message: item.text_message
       })
     })
 
-    console.log(dialog.value)
+    studentVuzing.data = response.data
+
+    console.log(studentVuzing)
   })
   .catch((error) => {
     console.error('Ошибка при получении данных:', error)
   })
+
+async function sendMessage() {
+  const params = new URLSearchParams()
+  const now = new Date()
+  const year = now.getFullYear()
+  const month = String(now.getMonth() + 1).padStart(2, '0')
+  const day = String(now.getDate()).padStart(2, '0')
+  currentDate.value = `${year}-${month}-${day}`
+
+  params.append('id_user', localStorage.id_user)
+  params.append('id_chat', 6)
+  params.append('text_message', inputText.value)
+
+  studentVuzing.value.push({
+    id_user: localStorage.id_user,
+    date_message: currentDate.value,
+    text_message: inputText.value
+  })
+
+  try {
+    console.log('Мы делаем запрос')
+    const response = await axios.post('http://localhost:8080/message.php', params, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    })
+
+    console.log(response.data)
+    inputText.value = ''
+  } catch (error) {
+    console.error('Ошибка при отправке данных:', error)
+  }
+}
 </script>
 
 <template>
@@ -60,15 +92,13 @@ axios
         <CardTitle>Диалог с Аноним №5784357493</CardTitle>
       </CardHeader>
       <CardContent class="flex flex-col gap-6">
-        <dialogListElement
-          v-for="item in dialog.value"
+        <messengerReplica
+          v-for="item in studentVuzing"
           :key="item.id"
-          :id_chat="item.id_chat"
+          :date_message="item.date_message"
           :id_student="item.id_student"
-          :last_message="item.last_message"
-          :last_message_date="item.last_message_date"
+          :text_message="item.text_message"
         />
-        <!-- <messengerReplica /> -->
         <!-- <messengerReplica />
         <messengerReplica />
         <messengerReplica />
@@ -78,8 +108,8 @@ axios
           <Button variant="outline" size="icon">
             <Paperclip class="w-4 h-4" />
           </Button>
-          <Input placeholder="Введите текст сообщения..."></Input>
-          <Button variant="outline" size="icon">
+          <Input type="text" v-model="inputText" placeholder="Введите текст сообщения..."></Input>
+          <Button @click="sendMessage" variant="outline" size="icon">
             <Send class="w-4 h-4" />
           </Button>
         </div>

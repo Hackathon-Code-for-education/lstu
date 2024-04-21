@@ -4,6 +4,16 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 const props = defineProps({
   id_student: String,
 })
+
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const goToMessenger = (dialogId) => {
+  console.log('click')
+  router.push({ name: 'Messenger', params: { dialogId: dialogId }});
+};
+
 </script>
 
 <template>

@@ -26,7 +26,7 @@ try {
     $stmt_check_chat->bindParam(':id_user_creator', $id_user_creator);
     $stmt_check_chat->bindParam(':id_user_with', $id_user_with);
     $stmt_check_chat->bindParam(':id_vuz', $id_vuz);
-    $stmt_check_chat->execute();
+    $stmt_check_chat->execute();    
     $existing_chat = $stmt_check_chat->fetchColumn();
 
     // Если чат уже существует, возвращаем его id_chat и сообщение
