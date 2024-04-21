@@ -2,7 +2,6 @@
 header('Access-Control-Allow-Origin: http://localhost:5173');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Access-Control-Allow-Methods: POST');
-// Подключение к базе данных
 $dbhost = 'postgres-db'; // Хост базы данных
 $dbname = 'code-future-2024'; // Имя вашей базы данных
 $dbuser = 'user'; // Ваше имя пользователя
@@ -15,7 +14,7 @@ try {
     echo "Ошибка подключения: " . $e->getMessage();
 }
 
-// Функция для получения всех чатов пользователя, их собеседников и последнего сообщения
+// Функция для получения всех чатов пользователя, их собеседников, последнего сообщения и времени его отправки
 function getUserChatsWithLastMessage($userId, $vuzId, $conn) {
     $query = "SELECT DISTINCT d1.id_chat, 
                       d2.id_user AS interlocutor_id,
@@ -23,7 +22,12 @@ function getUserChatsWithLastMessage($userId, $vuzId, $conn) {
                        FROM public.message 
                        WHERE id_chat = d1.id_chat 
                        ORDER BY date_message DESC, id_message DESC -- Сортировка по дате и id_message
-                       LIMIT 1) AS last_message
+                       LIMIT 1) AS last_message,
+                      (SELECT TO_CHAR(date_message, 'YYYY-MM-DD HH24:MI') -- Форматирование времени до минуты
+                       FROM public.message 
+                       WHERE id_chat = d1.id_chat 
+                       ORDER BY date_message DESC, id_message DESC -- Сортировка по дате и id_message
+                       LIMIT 1) AS last_message_date
               FROM public.does d1
               INNER JOIN public.does d2 ON d1.id_chat = d2.id_chat
               WHERE d1.id_user = :userId

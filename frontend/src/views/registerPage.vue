@@ -13,6 +13,7 @@
                   v-model="selectedRole"
                   v-bind="RadioField"
                   default-value="student"
+                  @change="handleRoleChange"
                 >
                   <div class="flex items-center space-x-2">
                     <RadioGroupItem id="r1" value="student" />
@@ -31,8 +32,6 @@
               <FormMessage />
             </FormItem>
           </FormField>
-
-          <p>Выбранная роль: {{ selectedRole }}</p>
 
           <FormField v-slot="{ componentField: FIOField }" name="fio">
             <FormItem>
@@ -61,7 +60,7 @@
               <FormMessage />
             </FormItem>
           </FormField>
-          <FormField v-slot="{ componentField: STUField }" name="stu">
+          <FormField v-if="isStuRole" v-slot="{ componentField: STUField }" name="stu">
             <FormItem>
               <FormLabel>Выберите свой ВУЗ</FormLabel>
               <FormControl>
@@ -125,6 +124,7 @@ import {
 } from '@/components/ui/select'
 import { ref } from 'vue'
 import axios from 'axios'
+import { computed } from 'vue'
 
 const router = useRouter()
 
@@ -155,13 +155,27 @@ const { handleSubmit, errors } = useForm({
   validationSchema: formSchema
 })
 
+const isStuRole = computed(() => selectedRole.value === 'student')
+
+let isVisible = ref(true)
 let selectedRole = ref('student')
+
+console.log(isVisible.value)
+console.log(selectedRole.value)
+
+const handleRoleChange = () => {
+  if (selectedRole.value === 'student' || selectedRole.value === 'representative') {
+    isVisible.value = true
+  } else {
+    isVisible.value = false
+  }
+}
 
 const onSubmit = handleSubmit(async (formData) => {
   const registerFormData = new FormData()
   const userData = formData
 
-  console.log(userData)
+  // console.log(userData)
   registerFormData.append('email', userData.email)
   registerFormData.append('full_name', userData.fio)
   registerFormData.append('password', userData.password)
@@ -174,14 +188,14 @@ const onSubmit = handleSubmit(async (formData) => {
         'Content-Type': 'multipart/form-data'
       }
     })
-    console.log(response.data)
+    // console.log(response.data)
     if (response.data.status == 'success') {
       localStorage.clear()
       localStorage.setItem('email', response.data.email)
       localStorage.setItem('id_user', response.data.id_user)
       localStorage.setItem('role', response.data.role_user)
 
-      router.push('/searchUniversity')
+      router.push('/')
     }
     // Высплывашка тостер
     const { toast } = useToast()

@@ -1,25 +1,31 @@
 <script setup>
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
+
+const props = defineProps({
+  id_student: String,
+  last_message_date: String,
+  id_chat: String,
+  last_message: String
+})
 </script>
 
 <template>
-  <div class="flex gap-4">
+  <div class="flex gap-4 w-full">
     <Avatar>
       <AvatarImage src="https://api.dicebear.com/8.x/lorelei-neutral/svg" alt="@radix-vue" />
       <AvatarFallback>CN</AvatarFallback>
     </Avatar>
     <!-- Содержимое элемента списка диалогов -->
-    <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-2 w-full">
       <!-- Заголовок элемента -->
       <div class="flex justify-between">
-        <p>Аноним №1029345784573</p>
+        <p>Аноним №{{ id_student*15+20 }}</p>
         <!-- Метаданные об элементе -->
-        <div>14 марта 2023</div>
+        <div>{{last_message_date}}</div>
       </div>
       <!-- Последняя строка диалога -->
       <p>
-        Лишь явные признаки победы институционализации, которые представляют собой яркий пример
-        континентально-европейского типа политической культуры, будут призваны к ответу.
+        {{ last_message }}
       </p>
     </div>
   </div>
