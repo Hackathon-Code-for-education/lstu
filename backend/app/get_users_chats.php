@@ -22,7 +22,7 @@ function getUserChatsWithLastMessage($userId, $vuzId, $conn) {
                        WHERE id_chat = d1.id_chat 
                        ORDER BY date_message DESC, id_message DESC -- Сортировка по дате и id_message
                        LIMIT 1) AS last_message,
-                      (SELECT date_message 
+                      (SELECT TO_CHAR(date_message, 'YYYY-MM-DD HH24:MI') -- Форматирование времени до минуты
                        FROM public.message 
                        WHERE id_chat = d1.id_chat 
                        ORDER BY date_message DESC, id_message DESC -- Сортировка по дате и id_message
