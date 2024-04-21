@@ -5,6 +5,35 @@
       <h1 class="text-black font-semibold text-2xl">Регистрация</h1>
       <div class="grid w-full max-w-sm items-center gap-1.5">
         <form class="w-96 space-y-6" @submit="onSubmit">
+          <FormField v-slot="{ componentField: RadioField }" name="Radio">
+            <FormItem>
+              <FormControl>
+                <RadioGroup
+                  class="flex w-96 gap-5 text-nowrap"
+                  v-model="selectedRole"
+                  v-bind="RadioField"
+                  default-value="student"
+                >
+                  <div class="flex items-center space-x-2">
+                    <RadioGroupItem id="r1" value="student" />
+                    <Label for="r1">Я студент</Label>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <RadioGroupItem id="r2" value="abiturient" />
+                    <Label for="r2">Я абитуриент</Label>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <RadioGroupItem id="r3" value="representative" />
+                    <Label for="r3">Я представитель вуза</Label>
+                  </div>
+                </RadioGroup>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          </FormField>
+
+          <p>Выбранная роль: {{ selectedRole }}</p>
+
           <FormField v-slot="{ componentField: FIOField }" name="fio">
             <FormItem>
               <FormLabel>ФИО</FormLabel>
@@ -76,6 +105,7 @@ import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import * as z from 'zod'
 import { h } from 'vue'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import {
   FormControl,
   FormDescription,
@@ -113,7 +143,11 @@ const formSchema = toTypedSchema(
       .string({ required_error: 'Поле не должно быть пустым' })
       .min(6, { message: 'Пароль должен содержать минимум 6 символов' })
       .max(40, { message: 'Пароль должен содержать не больше 40 символов' }),
-    stu: z.string({ required_error: 'Поле не должно быть пустым' })
+    stu: z.string({ required_error: 'Поле не должно быть пустым' }),
+    fio: z
+      .string({ required_error: 'Поле не должно быть пустым' })
+      .regex(/([А-ЯЁ][а-яё]+[\-\s]?){3,}/, { message: 'Заполните правильно ФИО' }),
+    Radio: z.string({ required_error: 'Поле не должно быть пустым' })
   })
 )
 
@@ -121,36 +155,45 @@ const { handleSubmit, errors } = useForm({
   validationSchema: formSchema
 })
 
+let selectedRole = ref('student')
+
 const onSubmit = handleSubmit(async (formData) => {
-  // const apiFormData = new FormData()
-  // const userData = formData
-  // apiFormData.append('login', userData.login)
-  // apiFormData.append('password', userData.password)
-  // try {
-  //   const response = await axios.post('http://localhost/postAuthAPI.php', apiFormData, {
-  //     headers: {
-  //       'Content-Type': 'multipart/form-data'
-  //     }
-  //   })
-  //   console.log(response.data)
-  //   if (response.data.status == 'success') {
-  //     localStorage.clear()
-  //     localStorage.setItem('email', response.data.email)
-  //     localStorage.setItem('id_user', response.data.id_user)
-  //     localStorage.setItem('role', response.data.role)
-  //     router.push('/mainPage')
-  //   }
-  //   // Высплывашка тостер
-  //   const { toast } = useToast()
-  //   if (response.data.status == 'error') {
-  //     toast({
-  //       description: 'Ошибка авторизации, введен не правильный логин или пароль',
-  //       variant: 'destructive'
-  //     })
-  //   }
-  // } catch (error) {
-  //   console.error('Ошибка при отправке данных:', error)
-  // }
+  const registerFormData = new FormData()
+  const userData = formData
+
+  console.log(userData)
+  registerFormData.append('email', userData.email)
+  registerFormData.append('full_name', userData.fio)
+  registerFormData.append('password', userData.password)
+  registerFormData.append('role', userData.Radio)
+  registerFormData.append('id_vuz', userData.stu)
+
+  try {
+    const response = await axios.post('http://localhost:8080/registration.php', registerFormData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+    console.log(response.data)
+    if (response.data.status == 'success') {
+      localStorage.clear()
+      localStorage.setItem('email', response.data.email)
+      localStorage.setItem('id_user', response.data.id_user)
+      localStorage.setItem('role', response.data.role_user)
+
+      router.push('/profile/aboutUniversity')
+    }
+    // Высплывашка тостер
+    const { toast } = useToast()
+    if (response.data.status == 'error') {
+      toast({
+        description: 'Ошибка авторизации, введен не правильный логин или пароль',
+        variant: 'destructive'
+      })
+    }
+  } catch (error) {
+    console.error('Ошибка при отправке данных:', error)
+  }
 })
 </script>
 

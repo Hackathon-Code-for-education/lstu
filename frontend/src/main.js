@@ -7,6 +7,11 @@ import AuthPage from './views/AuthPage.vue'
 import VirtualTour from './views/VirtualTour.vue'
 import registerPage from './views/registerPage.vue'
 import profilePage from './views/profilePage.vue'
+import aboutUni from './components/custom/profile/aboutUni.vue'
+import ReviewsPage from './views/ReviewsPage.vue'
+import dialogList from './components/custom/profile/dialogList.vue'
+import messenger from './components/custom/profile/messenger.vue'
+import SearchUniversity from './views/searchUniversity.vue'
 
 const router = createRouter({
   routes: [
@@ -19,16 +24,43 @@ const router = createRouter({
       path: '/registerPage',
       name: 'registerPage',
       component: registerPage
-    }, 
+    },
     {
       path: '/virtuatour',
       name: 'VirtualTour',
       component: VirtualTour
     },
     {
+      path: '/searchUniversity',
+      name: 'searchUniversity',
+      component: SearchUniversity
+    },
+    {
       path: '/profile',
       name: 'profile',
-      component: profilePage
+      component: profilePage,
+      children: [
+        {
+          path: 'aboutUniversity',
+          component: aboutUni
+        },
+        {
+          path: 'virtualTour',
+          component: VirtualTour
+        },
+        {
+          path: 'ReviewsPage',
+          component: ReviewsPage
+        },
+        {
+          path: 'dialogs',
+          component: dialogList
+        },
+        {
+          path: 'dialogs/:dialogId/messenger',
+          component: messenger
+        }
+      ]
     }
   ],
   history: createWebHistory()
