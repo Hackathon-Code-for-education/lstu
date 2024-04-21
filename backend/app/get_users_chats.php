@@ -1,6 +1,7 @@
 <?php
-
-// Подключение к базе данных
+header('Access-Control-Allow-Origin: http://localhost:5173');
+header('Access-Control-Allow-Headers: Content-Type');
+header('Access-Control-Allow-Methods: POST');
 $dbhost = 'postgres-db'; // Хост базы данных
 $dbname = 'code-future-2024'; // Имя вашей базы данных
 $dbuser = 'user'; // Ваше имя пользователя

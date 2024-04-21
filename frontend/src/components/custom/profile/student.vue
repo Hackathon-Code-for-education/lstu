@@ -1,5 +1,9 @@
 <script setup>
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
+
+const props = defineProps({
+  id_student: String,
+})
 </script>
 
 <template>
@@ -12,7 +16,7 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
     <div class="flex flex-col gap-2">
       <!-- Заголовок элемента -->
       <div class="flex justify-between">
-        <p>Аноним №15573</p>
+        <p>Аноним №{{ id_student*15+20 }}</p>
         <!-- Метаданные об элементе -->
       </div>
       <!-- Последняя строка диалога -->
