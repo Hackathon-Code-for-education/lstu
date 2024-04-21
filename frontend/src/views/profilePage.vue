@@ -9,6 +9,8 @@ import {
   MessageSquare,
   ShoppingBag
 } from 'lucide-vue-next'
+
+console.log(localStorage)
 </script>
 
 <template>

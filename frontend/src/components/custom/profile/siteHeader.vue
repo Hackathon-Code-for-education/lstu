@@ -4,9 +4,14 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { ref, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
-console.log(localStorage.full_name)
-
 let userName = ref(`${localStorage.full_name}`)
+
+let router = useRouter()
+
+const goToExit = () => {
+  localStorage.clear()
+  router.push('/')
+}
 </script>
 
 <template>
@@ -18,7 +23,7 @@ let userName = ref(`${localStorage.full_name}`)
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
       <p>{{ userName }}</p>
-      <p @click="goToExit" class="cursor-pointer">Выйти</p>
+      <p @click="goToExit" class="cursor-pointer text-s text-slate-600">Выйти</p>
     </div>
   </div>
 </template>
