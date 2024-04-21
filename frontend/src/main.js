@@ -11,6 +11,7 @@ import aboutUni from './components/custom/profile/aboutUni.vue'
 import ReviewsPage from './views/ReviewsPage.vue'
 import dialogList from './components/custom/profile/dialogList.vue'
 import messenger from './components/custom/profile/messenger.vue'
+import SearchUniversity from './views/searchUniversity.vue'
 
 const router = createRouter({
   routes: [
@@ -28,6 +29,11 @@ const router = createRouter({
       path: '/virtuatour',
       name: 'VirtualTour',
       component: VirtualTour
+    },
+    {
+      path: '/searchUniversity',
+      name: 'searchUniversity',
+      component: SearchUniversity
     },
     {
       path: '/profile',
