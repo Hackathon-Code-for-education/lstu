@@ -100,7 +100,7 @@ const onSubmit = handleSubmit(async (formData) => {
       localStorage.setItem('id_user', response.data.id_user)
       localStorage.setItem('role', response.data.role)
       localStorage.setItem('full_name', response.data.full_name)
-      router.push('/profile/aboutUniversity')
+      router.push('/searchUniversity')
     }
     // Высплывашка тостер
     const { toast } = useToast()
