@@ -69,7 +69,9 @@ const router = createRouter({
         },
         {
           path: 'dialogs/:dialogId/messenger',
-          component: messenger
+          component: messenger,
+          name: 'Messenger',
+          props: true
         },
         {
           path: 'structure',
