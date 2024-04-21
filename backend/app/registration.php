@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $full_name = $_POST["full_name"];
     $password = $_POST["password"];
     $role_user = $_POST["role"];
-    $role_user = $_POST["role"];
+
 
     if (empty($email) ||  empty($password) || empty($full_name)) {
 

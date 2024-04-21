@@ -1,5 +1,9 @@
 <?php
 
+header('Access-Control-Allow-Origin: http://localhost:5173');
+header('Access-Control-Allow-Headers: Content-Type');
+header('Access-Control-Allow-Methods: POST');
+
 $host = 'postgres-db';
 $dbname = 'code-future-2024';
 $user = 'user';
@@ -17,7 +21,7 @@ try {
     $sql = "SELECT f.id_feedback, u.full_name_user, f.rate_feedback, f.text_feedback, f.date_feedback, f.moderated
             FROM public.feedback AS f 
             INNER JOIN public.users AS u ON f.id_user = u.id_user 
-            WHERE f.id_vuz = :id_vuz";
+            WHERE f.id_vuz = :id_vuz AND f.moderated = true";
 
 
     $stmt = $pdo->prepare($sql);
