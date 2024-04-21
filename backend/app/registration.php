@@ -13,6 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
     $role_user = $_POST["role"];
 
+
     if (empty($email) ||  empty($password) || empty($full_name)) {
 
         header('Content-Type: application/json');
