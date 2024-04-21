@@ -3,8 +3,6 @@
 header('Access-Control-Allow-Origin: http://localhost:5173');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Access-Control-Allow-Methods: GET');
-
-
 try {
     $pdo = new PDO("pgsql:host=postgres-db; dbname=code-future-2024", "user", "user");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -13,7 +11,8 @@ try {
 }
 
 // SQL запрос
-$sql = "SELECT id_vuz, name_vuz, info_vuz, site_vuz, adress_vuz, rating_vuz, phone_vuz, photo_vuz FROM public.vuz ORDER BY id_vuz DESC";
+$sql = "SELECT id_vuz, name_vuz, info_vuz, site_vuz, adress_vuz, rating_vuz, phone_vuz, photo_vuz FROM public.vuz
+ORDER BY id_vuz DESC";
 
 try {
 

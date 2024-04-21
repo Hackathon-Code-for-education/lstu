@@ -1,4 +1,8 @@
 <?php
+header('Access-Control-Allow-Origin: http://localhost:5173');
+header('Access-Control-Allow-Headers: Content-Type');
+header('Access-Control-Allow-Methods: POST');
+
 // Параметры подключения к базе данных PostgreSQL
 $dbhost = 'postgres-db'; // Хост базы данных
 $dbname = 'code-future-2024'; // Имя вашей базы данных
@@ -14,7 +18,7 @@ try {
 }
 
 // Обработка загрузки файла и сохранение данных в базу данных
-if (isset($_POST['submit'])) {
+
     $id_vuz = $_POST['id_vuz']; // Получаем id_vuz из POST запроса
     $name_document = $_POST['name_document'];
 
@@ -44,5 +48,5 @@ if (isset($_POST['submit'])) {
     } else {
         die(json_encode(array("error" => "Ошибка при перемещении файла.")));
     }
-}
+
 ?>
