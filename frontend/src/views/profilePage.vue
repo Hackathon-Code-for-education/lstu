@@ -1,6 +1,8 @@
 <script setup>
 import siteHeader from '../components/custom/profile/siteHeader.vue'
 import Button from '@/components/ui/button/Button.vue'
+import axios from 'axios'
+import { ref, onMounted, computed } from 'vue'
 import {
   Info,
   LayoutDashboard,
@@ -11,6 +13,24 @@ import {
 } from 'lucide-vue-next'
 
 console.log(localStorage)
+
+const idVuz = ref(`${localStorage.id_vuz}`)
+
+console.log(idVuz.value)
+
+onMounted(async () => {
+  const apiFormData = new FormData()
+
+  apiFormData.append('id_vuz', idVuz.value)
+
+  try {
+    const response = await axios.post('http://localhost:8080/get_vuz_spec.php', apiFormData)
+
+    console.log('Ответ от сервера:', response.data)
+  } catch (error) {
+    console.error('Ошибка при отправке данных:', error)
+  }
+})
 </script>
 
 <template>
@@ -33,9 +53,9 @@ console.log(localStorage)
             >
           </router-link>
           <router-link to="structure">
-          <Button variant="ghost" class="justify-start gap-2 w-full"
-            ><LayoutDashboard /> Структура организации</Button
-          >
+            <Button variant="ghost" class="justify-start gap-2 w-full"
+              ><LayoutDashboard /> Структура организации</Button
+            >
           </router-link>
           <router-link to="virtualTour">
             <Button variant="ghost" class="justify-start gap-2 w-full"

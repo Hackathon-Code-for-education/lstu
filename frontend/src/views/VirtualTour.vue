@@ -20,7 +20,29 @@ const router = useRouter()
   <div class="flex flex-col gap-[12px] max-h-full h-full box-border">
     <h3 class="font-semibold text-2xl">Виртуальная экскурсия</h3>
     <h4 class="font-medium text-xl">Панорамный просмотр</h4>
-    <Panorama class="panoram w-[996px] h-[480px]" />
+    <!-- Небольшое меню: слева список туров, справа показ панорам -->
+    <div class="flex gap-4">
+      <!-- Список туров -->
+      <div class="flex flex-col gap-2">
+        <h5>Экскурсии</h5>
+        <router-link to="VirtualTour/edit">
+          <Button>Добавить экскурсию</Button>
+        </router-link>
+        <!-- СЮДА НУЖНО ВСТАВЛЯТЬ V-FOR ДЛЯ ВСЕХ СУЩЕСТВУЮЩИХ ЭКСКУРСИЙ -->
+        <div class="flex flex-col w-[300px]">
+          <Button class="justify-start" variant="ghost">Столовая</Button>
+          <Button class="justify-start" variant="ghost">Столовая</Button>
+          <Button class="justify-start" variant="ghost">Столовая</Button>
+          <Button class="justify-start" variant="ghost">Столовая</Button>
+        </div>
+      </div>
+      <!-- Просмотр тура -->
+      <div class="flex flex-col gap-2">
+        <h5>Просмотр тура</h5>
+        <!-- СЮДА НУЖНО ВСТАВЛЯТЬ V-FOR ДЛЯ ВСЕХ СУЩЕСТВУЮЩИХ ЭКСКУРСИЙ -->
+        <Panorama class="panoram w-[996px] h-[480px]" />
+      </div>
+    </div>
     <h4 class="font-semibold text-xl">Фотографии</h4>
     <PhotoCard img_tour="your_image_path" :id_vereficate="true" name_author="ЛГТУ" />
   </div>
