@@ -27,19 +27,8 @@ try {
     $stmt->bindParam(':id_vuz', $id_vuz);
     $stmt->execute();
 
-    $vuz_data = array();
-
     // Получаем данные о вузе
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $vuz_data[] = array(
-            'name_vuz' => $row['name_vuz'],
-            'info_vuz' => $row['info_vuz'],
-            'site_vuz' => $row['site_vuz'],
-            'adress_vuz' => $row['adress_vuz'],
-            'phone_vuz' => $row['phone_vuz'],
-            'photo_vuz' => $row['photo_vuz']
-        );
-    }
+    $vuz_data = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // Передаем данные в формате JSON
     $json_output = json_encode($vuz_data);
