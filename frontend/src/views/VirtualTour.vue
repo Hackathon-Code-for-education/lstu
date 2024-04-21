@@ -11,19 +11,17 @@ import { Star, ChevronRight, Send } from 'lucide-vue-next'
 
 import { useRouter } from 'vue-router'
 import PhotoCard from '@/components/custom/profile/photoCard.vue'
+import Panorama from '@/components/custom/profile/panoram.vue'
 
 const router = useRouter()
 </script>
+
 <template>
   <div class="flex flex-col gap-[24px] max-h-full h-full box-border">
     <h3 class="text-h3">Виртуальная экскурсия</h3>
     <h4 class="text-h4">Панорамный просмотр</h4>
-    <iframe class="panoram bg-red-700 w-[996px] h-[480px]" width="996" height="480" allowfullscreen style="border-style:none;" src="https://cdn.pannellum.org/2.5/pannellum.htm#panorama=https://pannellum.org/images/alma.jpg"></iframe>
+    <Panorama class="panoram bg-red-700 w-[996px]" />
     <h4 class="text-h4">Фотографии</h4>
-    <PhotoCard
-      img_tour="your_image_path"
-      :id_vereficate="true"
-      name_author="ЛГТУ"
-    />
+    <PhotoCard img_tour="your_image_path" :id_vereficate="true" name_author="ЛГТУ" />
   </div>
 </template>

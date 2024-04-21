@@ -24,6 +24,7 @@
     "tailwindcss-animate": "^1.0.7",
     "vee-validate": "^4.12.6",
     "vue": "^3.4.15",
+    "vue-pannellum": "^0.5.3",
     "vue-router": "^4.2.5",
     "vuex": "^4.1.0",
     "zod": "^3.22.5"
